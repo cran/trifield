@@ -30,28 +30,24 @@ Data frame with columns
 \author{
 Tim Keitt <tkeitt@gmail.com>
 }
+\references{\url{http://dx.doi.org/10.1016/j.ecolmodel.2012.05.020}}
 \seealso{
-\code{link{ternary.apply}}, \code{link{ternary.grid}}
+\code{\link{ternary.apply}}, \code{\link{ternary.grid}}
 }
 \examples{
-## The function is currently defined as
-function(grid.size)
-{
-	lx = 2 / sqrt(3)
-	nx = trunc(lx * grid.size)
-	ny = grid.size
-	x = seq(0, lx, length = nx)
-	y = seq(0, 1, length = ny)
-	xy = as.matrix(expand.grid(x = x, y = y))
-	xyi = as.matrix(expand.grid(x = 1:nx, y = 1:ny))
-	abc = xy2abc(xy)
-	i = rowSums(abc < 0) == FALSE
-	abc = abc[i,]
-	xy = xy[i,]	
-	xyi = xyi[i,]
-	res = data.frame(xy, xyi, abc)
-	names(res) = c('x', 'y', 'xi', 'yi', 'a', 'b', 'c')
-	res
-  }
+# See demo(trifield)
+\dontrun{
+grid.size = 128
+par(mar = rep(2, 4), oma = rep(0, 4))
+tg = ternary.grid(grid.size)
+f = function(x)
+        sin(2 * pi * x[1]) +
+        sin(3 * pi * x[2]) +
+        sin(4 * pi * x[3])
+z = ternary.apply(tg, f)
+tf = ternary.field(tg, z)
+plot(tf)
+ternary.legend()
+}
 }
 \keyword{ manip }

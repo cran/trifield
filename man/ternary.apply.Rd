@@ -29,17 +29,24 @@ A vector of results
 \author{
 Tim Keitt <tkeitt@gmail.com>
 }
+\references{\url{http://dx.doi.org/10.1016/j.ecolmodel.2012.05.020}}
 \seealso{
 \code{\link{ternary.field}}
 }
 \examples{
-## The function is currently defined as
-function(grid, f, ...)
-{
-	f = match.fun(f)
-	abc = grid[,letters[1:3]]
-	g = function(i) f(abc[i,], ...)
-	unlist(lapply(1:nrow(grid), g))
-  }
+# See demo(trifield)
+\dontrun{
+grid.size = 128
+par(mar = rep(2, 4), oma = rep(0, 4))
+tg = ternary.grid(grid.size)
+f = function(x)
+        sin(2 * pi * x[1]) +
+        sin(3 * pi * x[2]) +
+        sin(4 * pi * x[3])
+z = ternary.apply(tg, f)
+tf = ternary.field(tg, z)
+plot(tf)
+ternary.legend()
+}
 }
 \keyword{ manip }

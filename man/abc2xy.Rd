@@ -23,19 +23,25 @@ A matrix of \code{x}, \code{y} values, one per row
 \author{
 Timothy H. Keitt <tkeitt@gmail.com>
 }
+\references{\url{http://dx.doi.org/10.1016/j.ecolmodel.2012.05.020}}
 \seealso{
 \code{\link{xy2abc}}
 }
 \examples{
-## The function is currently defined as
-function(abc)
-{
-	tmat = c(1 / sqrt(3), 0, 2 / sqrt(3), 1, 0, 0)
-	dim(tmat) = c(3, 2)
-	res = as.matrix(abc) \%*\% tmat
-	colnames(res) = c("x", "y")
-	res
-  }
+# See demo(trifield)
+\dontrun{
+grid.size = 128
+par(mar = rep(2, 4), oma = rep(0, 4))
+tg = ternary.grid(grid.size)
+f = function(x)
+        sin(2 * pi * x[1]) +
+        sin(3 * pi * x[2]) +
+        sin(4 * pi * x[3])
+z = ternary.apply(tg, f)
+tf = ternary.field(tg, z)
+plot(tf)
+ternary.legend()
+}
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
